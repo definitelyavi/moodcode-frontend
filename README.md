@@ -200,7 +200,6 @@ npx serve -s build
 
 ## Known Issues
 
-- SoundCloud API approval pending for full production features
 - Rate limiting on GitHub API for unauthenticated requests
 - OAuth flow requires HTTPS in production
 
