@@ -43,7 +43,7 @@ Requires environment variables for API integration. See `.env.example` for confi
 
 ## Author
 
-**Avi** [@definitelyavi](https://github.com/definitelyavi)
+**Jashandeep Singh** [@definitelyavi](https://github.com/definitelyavi)
 
 ---
 
