@@ -204,13 +204,9 @@ npx serve -s build
 - Rate limiting on GitHub API for unauthenticated requests
 - OAuth flow requires HTTPS in production
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Author
 
-**Avi** (definitelyavi)
+**Jashandeep Singh** (definitelyavi)
 - GitHub: [@definitelyavi](https://github.com/definitelyavi)
 - Project Backend: [moodcode-backend](https://github.com/definitelyavi/moodcode-backend)
 
