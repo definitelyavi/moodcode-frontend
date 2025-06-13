@@ -2,8 +2,6 @@
 
 An intelligent mood detection system that analyzes your Git commit patterns and generates personalized SoundCloud playlists to match your current coding state.
 
-![MoodCode Demo](https://via.placeholder.com/800x400/171717/ffffff?text=MoodCode+Demo) <!-- Replace with actual screenshot -->
-
 ## Overview
 
 MoodCode bridges the gap between your development workflow and your music preferences. By analyzing the sentiment and patterns in your Git commits, it intelligently detects your coding mood and curates the perfect soundtrack for your development session.
