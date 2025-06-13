@@ -1,70 +1,229 @@
-# Getting Started with Create React App
+# MoodCode Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An intelligent mood detection system that analyzes your Git commit patterns and generates personalized SoundCloud playlists to match your current coding state.
 
-## Available Scripts
+![MoodCode Demo](https://via.placeholder.com/800x400/171717/ffffff?text=MoodCode+Demo) <!-- Replace with actual screenshot -->
 
-In the project directory, you can run:
+## Overview
 
-### `npm start`
+MoodCode bridges the gap between your development workflow and your music preferences. By analyzing the sentiment and patterns in your Git commits, it intelligently detects your coding mood and curates the perfect soundtrack for your development session.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Intelligent Mood Detection**: Analyzes commit messages, timestamps, and development patterns
+- **SoundCloud Integration**: OAuth authentication and playlist creation
+- **Real-time Analysis**: Processes recent commits to understand current coding state  
+- **5 Mood Categories**: Frustrated, Excited, Satisfied, Tired, and Euphoric states
+- **Responsive Design**: Modern, clean interface built with React and Tailwind CSS
+- **GitHub API Integration**: Fetches and analyzes repository commit history
+- **Personalized Playlists**: Generates mood-appropriate music collections
 
-### `npm test`
+## Live Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**[View Live Application](https://moodcode-frontend.vercel.app)**
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Frontend Framework**: React 18
+- **Routing**: React Router DOM
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **APIs**: GitHub REST API, SoundCloud API
+- **Authentication**: OAuth 2.0 with PKCE flow
+- **Deployment**: Vercel
+- **Backend**: Node.js (separate repository)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js 16+ and npm
+- GitHub account (for repository analysis)
+- SoundCloud account (for playlist creation)
 
-### `npm run eject`
+### Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/definitelyavi/moodcode-frontend.git
+   cd moodcode-frontend
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Configure environment variables**
+   ```bash
+   # Create .env file
+   cp .env.example .env
+   ```
+   
+   Add your configuration:
+   ```env
+   REACT_APP_API_URL=http://localhost:3001
+   REACT_APP_SOUNDCLOUD_CLIENT_ID=your_soundcloud_client_id
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Start development server**
+   ```bash
+   npm start
+   ```
 
-## Learn More
+## How It Works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Repository Analysis
+- Enter any public GitHub repository URL
+- System fetches recent commit history via GitHub API
+- Optional: Add GitHub token for private repos and higher rate limits
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Mood Detection Algorithm
+The system analyzes multiple factors:
+- **Keyword Analysis**: Detects sentiment in commit messages
+- **Temporal Patterns**: Considers commit timing and frequency  
+- **Message Structure**: Analyzes length, punctuation, and formatting
+- **Development Context**: Weighs recent vs. older commits
 
-### Code Splitting
+### 3. Music Matching
+Each detected mood maps to specific music characteristics:
+- **Frustrated** → Heavy & Intense (Metal, Hard Rock)
+- **Excited** → Upbeat & Electronic (Dance, House)
+- **Satisfied** → Indie & Alternative (Chill Indie)
+- **Tired** → Ambient & Chill (Lo-fi, Ambient)
+- **Euphoric** → Uplifting & Epic (Trance, Progressive)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 4. Playlist Generation
+- Authenticates with SoundCloud via OAuth
+- Creates personalized playlist based on detected mood
+- Curates tracks matching energy level and genre preferences
 
-### Analyzing the Bundle Size
+## Mood Detection Examples
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```javascript
+// Frustrated mood indicators
+"fix critical bug in payment system"
+"another damn deployment issue"
+"urgent hotfix for production crash"
 
-### Making a Progressive Web App
+// Excited mood indicators  
+"awesome new feature implementation!"
+"finally got the algorithm working"
+"amazing performance improvements"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+// Satisfied mood indicators
+"clean code refactor complete"
+"improved error handling"
+"optimized database queries"
+```
 
-### Advanced Configuration
+## Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+src/
+├── App.js                         # Main application router
+├── App.css                        # Application styles
+├── App.test.js                    # Application tests
+├── index.js                       # React DOM entry point
+├── index.css                      # Global styles
+├── reportWebVitals.js            # Performance monitoring
+├── setupTests.js                 # Test configuration
+├── api.js                        # General API service
+├── githubApi.js                  # GitHub API client
+├── sentimentAnalysis.js          # Mood detection algorithms
+├── soundCloudApi.js              # SoundCloud API utilities
+├── useSoundCloud.js              # SoundCloud API integration hook
+├── CallbackPage.jsx              # OAuth callback handler
+├── DemoBanner.jsx                # Demo mode indicator
+└── MoodPlaylistGenerator.jsx     # Main application component
+```
 
-### Deployment
+## API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The frontend communicates with these backend endpoints:
 
-### `npm run build` fails to minify
+- `GET /auth/soundcloud/url` - Get OAuth authorization URL
+- `POST /auth/soundcloud/token` - Exchange code for access token
+- `POST /api/soundcloud/playlist` - Create mood-based playlist
+- `GET /api/soundcloud/search` - Search SoundCloud tracks
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Testing
+
+```bash
+# Run test suite
+npm test
+
+# Run tests with coverage
+npm test -- --coverage
+
+# Run tests in watch mode
+npm test -- --watch
+```
+
+## Deployment
+
+### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Configure environment variables in Vercel dashboard
+3. Deploy automatically on every push to main branch
+
+### Manual Build
+```bash
+# Create production build
+npm run build
+
+# Serve locally to test
+npx serve -s build
+```
+
+## Security & Privacy
+
+- No sensitive data stored in frontend code
+- OAuth tokens handled securely via backend
+- Environment variables for all API configurations  
+- GitHub tokens optional and never stored permanently
+- PKCE flow implementation for enhanced security
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## Future Enhancements
+
+- [ ] Machine learning-based mood detection
+- [ ] Spotify integration as alternative to SoundCloud
+- [ ] Team mood analysis for collaborative projects
+- [ ] Historical mood trends and analytics
+- [ ] Custom mood-music mapping preferences
+- [ ] Integration with other music platforms
+
+## Known Issues
+
+- SoundCloud API approval pending for full production features
+- Rate limiting on GitHub API for unauthenticated requests
+- OAuth flow requires HTTPS in production
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+**Avi** (definitelyavi)
+- GitHub: [@definitelyavi](https://github.com/definitelyavi)
+- Project Backend: [moodcode-backend](https://github.com/definitelyavi/moodcode-backend)
+
+## Acknowledgments
+
+- [Create React App](https://create-react-app.dev/) for the React boilerplate
+- [Tailwind CSS](https://tailwindcss.com/) for the styling framework
+- [Lucide React](https://lucide.dev/) for the beautiful icons
+- [SoundCloud](https://soundcloud.com/) for music API access
+- [GitHub](https://github.com/) for repository data access
+
+---
+
+*Built with care for developers who code to music*
